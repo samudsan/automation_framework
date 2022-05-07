@@ -3,14 +3,20 @@ package org.sandeep.driver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.sandeep.constants.FramworkConstants;
+import org.sandeep.utilities.ReadPropertyFile;
 
-public class Driver {
+import java.io.IOException;
+import java.nio.ReadOnlyBufferException;
 
-    public static void initDriver() {
+public final class Driver {
+
+    private Driver(){}
+
+    public static void initDriver() throws Exception {
         if(DriverManager.getDriver()==null) {
             System.setProperty("webdriver.chrome.driver", FramworkConstants.getChromDriverPath());
             DriverManager.setDriver(new ChromeDriver());
-            DriverManager.getDriver().get("https://www.google.com");
+            DriverManager.getDriver().get(ReadPropertyFile.getValue("url"));
         }
     }
 
